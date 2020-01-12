@@ -12,12 +12,8 @@ melbourne_data = pd.read_csv(melbourne_file_path)
 
 
 # The Melbourne data has some missing values (some houses for which some variables weren't recorded.)
-# We'll learn to handle missing values in a later tutorial.  
-# Your Iowa data doesn't have missing values in the columns you use. 
-# So we will take the simplest option for now, and drop houses from our data. 
-# Don't worry about this much for now, though the code is:
 
-# dropna drops missing values (think of na as "not available")
+# dropna drops missing values (drop not available)
 melbourne_data = melbourne_data.dropna(axis=0)
 
 #dot notation to select column we want to predict and set as preciction target (y)
@@ -49,6 +45,5 @@ print("Predictions for the following 5 houses")
 print(X.head())
 
 #make prediction
-
 print("Price predictions are: ")
 print(melbourne_model.predict(X.head()))
