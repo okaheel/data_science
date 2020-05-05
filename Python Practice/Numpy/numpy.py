@@ -33,5 +33,11 @@ february_rides = february.shape[0]
 print(february_rides)
 
 #check the shape and type of a dataframe
+f500 = pd.read_csv('f500.csv',index_col=0)
 f500_shape = f500.shape
 f500_type = type(f500)
+
+#remove columns with null values
+laptops_no_null_rows = laptops.dropna(axis = 1)
+#remove rows with null values
+laptops_no_null_cols = laptops.dropna(axis = 0)
