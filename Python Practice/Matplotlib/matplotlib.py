@@ -97,3 +97,19 @@ for i in range(5):
     subset = unrate[start_index:end_index]
     plt.plot(subset['MONTH'], subset['VALUE'], c=colors[i])
 plt.show()
+
+#plot with multiple lines represenitng years on same graph
+# fig = plt.figure(figsize=(10,6))
+colors = ['red', 'blue', 'green', 'orange', 'black']
+for i in range(5):
+    start_index = i*12
+    end_index = (i+1)*12
+    subset = unrate[start_index:end_index]
+    label = str(1948 + i)
+    plt.plot(subset['MONTH'], subset['VALUE'], c=colors[i], label=label)
+plt.legend(loc='upper left')
+plt.title("Monthly Unemployment Trends, 1948-1952")
+plt.xlabel("Month, Integer")
+plt.ylabel("Unemployment Rate, Percent")
+
+plt.show() 
