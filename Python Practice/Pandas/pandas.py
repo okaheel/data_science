@@ -33,3 +33,8 @@ tech_outside_usa = f500[(f500["sector"] == "Technology") & (f500["country"] != "
 #find the unique ram values that laptops have
 laptops["ram"] = laptops["ram"].str.replace('GB','')
 unique_ram = laptops["ram"].unique()
+
+#use pandas to date time function to turn convert date into datetime values
+unrate = pd.read_csv("unrate.csv")
+unrate['DATE'] = pd.to_datetime(unrate['DATE'])
+unrate.head(12)
