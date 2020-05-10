@@ -54,10 +54,46 @@ plt.show()
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
+#same but this sets plot size to 12 inches width by 5 inches height 
+fig = plt.figure(figsize=(12, 5))
 ax1 = fig.add_subplot(2,1,1)
 ax2 = fig.add_subplot(2,1,2)
 
 ax1.plot(unrate[0:12]['DATE'], unrate[0:12]['VALUE'])
 ax2.plot(unrate[12:24]['DATE'], unrate[12:24]['VALUE'])
 
+plt.show()
+
+
+#divide it up into five plots with one plot for each year
+#set plot size to 12 height and 12 width
+fig = plt.figure(figsize=(12,12))
+#generate a grid of 5 rows and 1 column and plot individual years data
+for i in range(5):
+    ax = fig.add_subplot(5,1,i+1)
+    start_index = i*12
+    end_index = (i+1)*12
+    subset = unrate[start_index:end_index]
+    ax.plot(subset['DATE'], subset['VALUE'])
+#show using plt
+plt.show()
+
+
+#plot two lines on the same graph with diffrent colors
+unrate['MONTH'] = unrate['DATE'].dt.month
+fig = plt.figure(figsize=(6,3))
+
+plt.plot(unrate[0:12]['MONTH'], unrate[0:12]['VALUE'], c='red')
+plt.plot(unrate[0:12]['MONTH'], unrate[12:24]['VALUE'], c='blue')
+
+plt.show()
+
+#breaking up plots by colors
+fig = plt.figure(figsize=(10,6))
+colors = ['red', 'blue', 'green', 'orange', 'black']
+for i in range(5):
+    start_index = i*12
+    end_index = (i+1)*12
+    subset = unrate[start_index:end_index]
+    plt.plot(subset['MONTH'], subset['VALUE'], c=colors[i])
 plt.show()
