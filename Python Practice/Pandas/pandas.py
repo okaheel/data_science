@@ -45,3 +45,8 @@ reviews = pd.read_csv('fandango_scores.csv')
 cols = ['FILM', 'RT_user_norm', 'Metacritic_user_nom', 'IMDB_norm', 'Fandango_Ratingvalue', 'Fandango_Stars']
 norm_reviews = reviews[cols]
 print(norm_reviews[:1])
+
+#read in csv and filter to only desired columns and remove NA values
+import pandas as pd
+titanic = pd.read_csv('train.csv')
+titanic = titanic[["Survived", "Pclass", "Sex", "Age", "SibSp", "Parch", "Fare", "Embarked"]].dropna()

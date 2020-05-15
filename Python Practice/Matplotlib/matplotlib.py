@@ -244,3 +244,28 @@ ax3.set_xlim(0, 5)
 ax3.set_ylim(0, 5)
 
 plt.show()
+
+#plot histogram of titanic passengers age
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.distplot(titanic['Age'])
+plt.show()
+
+#plot ages across classes with multiple histograms and remove the spine using despine
+g = sns.FacetGrid(titanic, col="Pclass", size=6)
+g.map(sns.kdeplot, "Age", shade=True)
+sns.despine(left=True, bottom=True)
+plt.show()
+
+#show sex as hue, with two overlapping plots one sex per each color
+g = sns.FacetGrid(titanic, col="Survived", row="Pclass", hue ="Sex", size=3)
+g.map(sns.kdeplot, "Age", shade=True)
+sns.despine(left=True, bottom=True)
+plt.show()
+
+#same plot with added legend
+g = sns.FacetGrid(titanic, col="Survived", row="Pclass", hue ="Sex", size =3)
+g.map(sns.kdeplot, "Age", shade=True)
+sns.despine(left=True, bottom=True)
+g.add_legend()
+plt.show()
