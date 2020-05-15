@@ -113,3 +113,134 @@ plt.xlabel("Month, Integer")
 plt.ylabel("Unemployment Rate, Percent")
 
 plt.show() 
+
+fig = plt.figure(figsize=(16, 16))
+
+## Generate first column of line charts. STEM degrees.
+for sp in range(0,18,3):
+    cat_index = int(sp/3)
+    ax = fig.add_subplot(6,3,sp+1)
+    ax.plot(women_degrees['Year'], women_degrees[stem_cats[cat_index]], c=cb_dark_blue, label='Women', linewidth=3)
+    ax.plot(women_degrees['Year'], 100-women_degrees[stem_cats[cat_index]], c=cb_orange, label='Men', linewidth=3)
+    for key,spine in ax.spines.items():
+        spine.set_visible(False)
+    ax.set_xlim(1968, 2011)
+    ax.set_ylim(0,100)
+    ax.set_title(stem_cats[cat_index])
+    ax.tick_params(bottom="off", top="off", left="off", right="off", labelbottom='off')
+    ax.set_yticks([0,100])
+    
+    if cat_index == 0:
+        ax.text(2003, 85, 'Women')
+        ax.text(2005, 10, 'Men')
+    elif cat_index == 5:
+        ax.text(2005, 87, 'Men')
+        ax.text(2003, 7, 'Women')
+        ax.tick_params(labelbottom='on')
+
+## Generate second column of line charts. Liberal arts degrees.
+for sp in range(1,16,3):
+    cat_index = int((sp-1)/3)
+    ax = fig.add_subplot(6,3,sp+1)
+    ax.plot(women_degrees['Year'], women_degrees[lib_arts_cats[cat_index]], c=cb_dark_blue, label='Women', linewidth=3)
+    ax.plot(women_degrees['Year'], 100-women_degrees[lib_arts_cats[cat_index]], c=cb_orange, label='Men', linewidth=3)
+    for key,spine in ax.spines.items():
+        spine.set_visible(False)
+    ax.set_xlim(1968, 2011)
+    ax.set_ylim(0,100)
+    ax.set_title(lib_arts_cats[cat_index])
+    ax.tick_params(bottom="off", top="off", left="off", right="off", labelbottom='off')
+    ax.set_yticks([0,100])
+    
+    if cat_index == 0:
+        ax.text(2003, 78, 'Women')
+        ax.text(2005, 18, 'Men')
+    elif cat_index == 4:
+        ax.tick_params(labelbottom='on')
+
+## Generate third column of line charts. Other degrees.
+for sp in range(2,20,3):
+    cat_index = int((sp-2)/3)
+    ax = fig.add_subplot(6,3,sp+1)
+    ax.plot(women_degrees['Year'], women_degrees[other_cats[cat_index]], c=cb_dark_blue, label='Women', linewidth=3)
+    ax.plot(women_degrees['Year'], 100-women_degrees[other_cats[cat_index]], c=cb_orange, label='Men', linewidth=3)
+    for key,spine in ax.spines.items():
+        spine.set_visible(False)
+    ax.set_xlim(1968, 2011)
+    ax.set_ylim(0,100)
+    ax.set_title(other_cats[cat_index])
+    ax.tick_params(bottom="off", top="off", left="off", right="off", labelbottom='off')
+    ax.set_yticks([0,100])
+    
+    if cat_index == 0:
+        ax.text(2003, 90, 'Women')
+        ax.text(2005, 5, 'Men')
+    elif cat_index == 5:
+        ax.text(2005, 62, 'Men')
+        ax.text(2003, 30, 'Women')
+        ax.tick_params(labelbottom='on')
+        
+fig.savefig("gender_degrees.png")        
+plt.show()
+
+#plotting average user rating for avengers age of ultron from diffrent sources
+import matplotlib.pyplot as plt
+from numpy import arange
+num_cols = ['RT_user_norm', 'Metacritic_user_nom', 'IMDB_norm', 'Fandango_Ratingvalue', 'Fandango_Stars']
+
+bar_widths = norm_reviews[num_cols].iloc[0].values
+bar_positions = arange(5) + 0.75
+tick_positions = range(1,6)
+fig, ax = plt.subplots()
+ax.barh(bar_positions, bar_widths, 0.5)
+
+ax.set_yticks(tick_positions)
+ax.set_yticklabels(num_cols)
+ax.set_ylabel('Rating Source')
+ax.set_xlabel('Average Rating')
+ax.set_title('Average User Rating For Avengers: Age of Ultron (2015)')
+plt.show()
+
+#fandango vs rotten tomatoes reviews scatter plot
+fig = plt.figure(figsize=(5,10))
+ax1 = fig.add_subplot(2,1,1)
+ax2 = fig.add_subplot(2,1,2)
+reviews = pd.read_csv('fandango_scores.csv')
+cols = ['FILM', 'RT_user_norm', 'Metacritic_user_nom', 'IMDB_norm', 'Fandango_Ratingvalue', 'Fandango_Stars']
+norm_reviews = reviews[cols]
+
+ax1.scatter(norm_reviews['Fandango_Ratingvalue'], norm_reviews['RT_user_norm'])
+ax1.set_xlabel('Fandango')
+ax1.set_ylabel('Rotten Tomatoes')
+ax2.scatter(norm_reviews['RT_user_norm'], norm_reviews['Fandango_Ratingvalue'])
+ax2.set_xlabel('Rotten Tomatoes')
+ax2.set_ylabel('Fandango')
+plt.show()
+
+#Fandango vs RT and Fandango vs Metacritic and Fandango vs IMDB subplots with limits set between 0 and 5
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize=(5,10))
+ax1 = fig.add_subplot(3,1,1)
+ax2 = fig.add_subplot(3,1,2)
+ax3 = fig.add_subplot(3,1,3)
+
+ax1.scatter(norm_reviews["Fandango_Ratingvalue"], norm_reviews["RT_user_norm"])
+ax1.set_xlabel('Fandango')
+ax1.set_ylabel('Rotten Tomatoes')
+ax1.set_xlim(0, 5)
+ax1.set_ylim(0, 5)
+
+ax2.scatter(norm_reviews["Fandango_Ratingvalue"], norm_reviews["Metacritic_user_nom"])
+ax2.set_xlabel('Fandango')
+ax2.set_ylabel('Metacritic')
+ax2.set_xlim(0, 5)
+ax2.set_ylim(0, 5)
+
+ax3.scatter(norm_reviews['Fandango_Ratingvalue'], norm_reviews['IMDB_norm'])
+ax3.set_xlabel('Fandango')
+ax3.set_ylabel('IMDB')
+ax3.set_xlim(0, 5)
+ax3.set_ylim(0, 5)
+
+plt.show()
